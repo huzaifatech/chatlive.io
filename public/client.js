@@ -43,7 +43,13 @@ function appendMessage(msg,type) {
     massageArea.appendChild(mainDiv)
 
 }
-
+let typingDiv=document.querySelector('.typing')
+socket.on('typing',(msg)=>{
+  typingDiv.innerHTML=`${msg.user} is typing....`
+})
 socket.on('message',(msg)=>{
    appendMessage(msg,'incoming')
+})
+textarea.addEventListener('keyup',(e)=>{
+  socket.emit('typing', {user})
 })
